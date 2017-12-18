@@ -397,6 +397,11 @@ chm:earNumber a rdf:Property ;
               rdfs:range xsd:integer ;
                rdfs:comment "the number of ears"^^xsd:string .
 
+chm:earLike a rdf:Property ;
+             rdfs:domain chm:ear ;
+             rdfs:range chm:animal ;
+             rdfs:comment "monster's ear like"^^xsd:string .
+
 ##feet
 chm:hasFeet a rdf:Property ;
             rdfs:domain chm:body ;
@@ -450,6 +455,12 @@ chm:wingLike a rdf:Property ;
               rdfs:range chm:animal ;
               rdfs:comment "wings like other animals"^^xsd:string .
 
+chm:wingColor a rdf:Property ;
+              rdfs:domain chm:wing ;
+              rdfs:range chm:colour ;
+              rdfs:comment "Monster's wing color"^^xsd:string .
+
+
 ##tail
 chm:hasTail a rdf:Property ;
             rdfs:domain chm:body ;
@@ -470,6 +481,12 @@ chm:tailColour a rdf:Property ;
                rdfs:domain chm:tail ;
                rdfs:range chm:colour ;
                rdfs:comment "the colour of tails"^^xsd:string .
+
+chm:tailSizeThan a rdf:Property ;
+           rdfs:domain chm:tail ;
+           rdfs:range chm:animal ;
+           rdfs:comment "tails are longer or shorter than the tail of other animals"^^xsd:string .
+
 
 ##eyes
 chm:hasEye a rdf:Property ;
