@@ -161,6 +161,12 @@ chm:byWorn a rdf:Property ;
          rdfs:range xsd:string ;
          rdfs:comment "Efficacy by wearing monsters' feathers"^^xsd:string .
 
+chm:byReared a rdf:Property ;
+        rdfs:subPropertyOf chm:hasEfficacy ;
+        rdfs:domain chm:monster ;
+        rdfs:range xsd:string ;
+        rdfs:comment "Efficacy by rearing monsters' feathers"^^xsd:string .
+
 ##voice
 chm:hasSameVoiceAs a rdf:Property ;
                    rdfs:domain chm:monster ;
@@ -219,6 +225,11 @@ chm:beakShape a rdf:Property ;
               rdfs:domain chm:beak ;
               rdfs:range xsd:string ;
               rdfs:comment "Monster's beak shape"^^xsd:string .
+
+chm:beakLike a rdf:Property ;
+             rdfs:domain chm:beak ;
+             rdfs:range chm:animal ;
+             rdfs:comment "Monster's beak same as other animals"^^xsd:string .
 
 ##arm
 chm:hasArm a rdf:Property ;
@@ -381,6 +392,11 @@ chm:hasSameHeadAs a rdf:Property ;
                   rdfs:range chm:animal ;
                   rdfs:comment "head is similar to other animals"^^xsd:string .
 
+chm:headSizeThan a rdf:Property ;
+           rdfs:domain chm:head ;
+           rdfs:range chm:animal ;
+           rdfs:comment "heads are larger or smaller than the head of other animals"^^xsd:string .
+
 ##ear
 chm:hasEars a rdf:Property ;
             rdfs:domain chm:head ;
@@ -513,6 +529,11 @@ chm:eyesLike a rdf:Property ;
               rdfs:domain chm:eye ;
               rdfs:range chm:thing ;
               rdfs:comment "monster's eyes like"^^xsd:string .
+
+chm:eyeColor a rdf:Property ;
+              rdfs:domain chm:eye ;
+              rdfs:range chm:colour ;
+              rdfs:comment "Monster's eye color"^^xsd:string .
 
 ##characters
 chm:hasCharacters a rdf:Property ;
