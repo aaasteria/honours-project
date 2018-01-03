@@ -100,12 +100,52 @@ chm:mountain a owl:Class ;
              rdfs:subClassOf chm:habitat ;
              rdfs:comment "represents mountains"^^xsd:string .
 
+chm:mountainRange a owl:Class ;
+            owl:equivalentClass dbpedia-owl:MountainRange ;
+            rdfs:subClassOf chm:mountainSeries ;
+            rdfs:comment "represents mountain range"^^xsd:string .
+
+chm:mountainSeries a owl:Class ;
+              rdfs:comment "represents the main mountain series"^^xsd:string .
+
 chm:river a owl:Class ;
              owl:equivalentClass place:River ;
              rdfs:subClassOf chm:habitat ;
-             rdfs:comment "represents mountains"^^xsd:string .
+             rdfs:comment "represents rivers"^^xsd:string .
+
+chm:location a owl:Class ;
+             rdfs:comment "location of mountains"^^xsd:string .
+
+chm:cardinalDirection a owl:Class ;
+             owl:equivalentClass dbpedia-owl:CardinalDirection ;
+             rdfs:comment "represents directions"^^xsd:string .
 
 #properties
+chm:locateAt a rdf:Property ;
+          rdfs:domain chm:mountain ;
+          rdfs:range chm:location ;
+          rdfs:comment "the location that one mountain locates at"
+
+chm:belongTo a rdf:Property ;
+          rdfs:domain chm:mountain ;
+          rdfs:range chm:mountainSeries ;
+          rdfs:comment "the series that a mountain belongs to"^^xsd:string .
+
+chm:hasDirection a rdf:Property ;
+          rdfs:domain chm:location ;
+          rdfs:range chm:cardinalDirection ;
+          rdfs:comment "the direction of a mountain from another mountain"^^xsd:string .
+
+chm:hasDistance a rdf:Property ;
+          rdfs:domain chm:location ;
+          rdfs:range xsd:integer ;
+          rdfs:comment "the distance of a mountain from another mountain"^^xsd:string .
+
+chm:rangeFrom a rdf:Property ;
+          rdfs:domain chm:location ;
+          rdfs:range chm:mountain ;
+          rdfs:comment "the name of a mountain next to this mountain"^^xsd:string .
+
 chm:omenBySeen a rdf:Property ;
           rdfs:domain chm:monster ;
           rdfs:range xsd:string ;
@@ -135,7 +175,17 @@ chm:hasRiver a rdf:Property ;
 chm:originsFrom a rdf:Property ;
                 rdfs:domain chm:river ;
                 rdfs:range chm:mountain ;
-                rdfs:comment "River origins fron the mountain"^^xsd:string .
+                rdfs:comment "River origins from the mountain"^^xsd:string .
+
+chm:destination a rdf:Property ;
+                rdfs:domain chm:river ;
+                rdfs:range chm:river ;
+                rdfs:comment "River destinates to"^^xsd:string .
+
+chm:direction a rdf:Property ;
+                rdfs:domain chm:river ;
+                rdfs:range chm:cardinalDirection ;
+                rdfs:comment "River direction"^^xsd:string .
 
 ##Efficacy
 chm:hasTasteOf a rdf:Property ;
