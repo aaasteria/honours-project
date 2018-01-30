@@ -31,7 +31,7 @@ chm:mane a owl:Class ;
 chm:beak a owl:Class ;
          rdfs:comment "represents monster's beak"^^xsd:string .
 
-chm:stripe a owl:Class ;
+chm:markings a owl:Class ;
            rdfs:comment "represents monster's stripe"^^xsd:string .
 
 chm:wings a owl:Class ;
@@ -58,6 +58,10 @@ chm:mouth a owl:Class ;
 chm:hand a owl:Class ;
         rdfs:comment "represents monster's hand"^^xsd:string .
 
+chm:fur a owl:Class ;
+        rdfs:label "髦"@cn
+        rdfs:comment "represents monster's fur"^^xsd:string .
+
 chm:horn a owl:Class ;
         rdfs:comment "represents monster's horn"^^xsd:string .
 
@@ -66,6 +70,9 @@ chm:feather a owl:Class ;
 
 chm:bristle a owl:Class ;
             rdfs:comment "represents monster's bristle"^^xsd:string .
+
+chm:spur a owl:Class ;
+            rdfs:comment "represents monster's spurs"^^xsd:string .
 
 chm:skin a owl:Class ;
             rdfs:comment "represents monster's skin"^^xsd:string .
@@ -98,27 +105,46 @@ chm:habitat a owl:Class ;
 chm:mountain a owl:Class ;
              owl:equivalentClass place:Mountain ;
              rdfs:subClassOf chm:habitat ;
+             rdfs:label "Mountain"@en ;
+             rdfs:label "山"@cn ;
              rdfs:comment "represents mountains"^^xsd:string .
 
 chm:mountainRange a owl:Class ;
             owl:equivalentClass dbpedia-owl:MountainRange ;
             rdfs:subClassOf chm:mountainSeries ;
+            rdfs:label "Mountain Range"@en ;
+            rdfs:label "山系"@cn ;
             rdfs:comment "represents mountain range"^^xsd:string .
 
 chm:mountainSeries a owl:Class ;
+              rdfs:label "Mountain Series"@en ;
+              rdfs:label "山经"@cn ;
               rdfs:comment "represents the main mountain series"^^xsd:string .
 
 chm:river a owl:Class ;
              owl:equivalentClass place:River ;
              rdfs:subClassOf chm:habitat ;
+             rdfs:label "River"@en
+             rdfs:label "水"@cn
              rdfs:comment "represents rivers"^^xsd:string .
 
+chm:partOfMountain a owl:Class ;
+                      rdfs:subClassOf chm:mountain ;
+                      rdfs:label "Part Of Mountain"@en
+                      rdfs:label "山的部分"@cn
+                      rdfs:comment "represents parts of mountains"^^xsd:string .
+
 chm:location a owl:Class ;
-             rdfs:comment "location of mountains"^^xsd:string .
+              rdfs:label "Mountain Location"@en ;
+              rdfs:label "位置"@cn ;
+              rdfs:comment "location of mountains"^^xsd:string .
 
 chm:cardinalDirection a owl:Class ;
              owl:equivalentClass dbpedia-owl:CardinalDirection ;
              rdfs:comment "represents directions"^^xsd:string .
+
+chm:country a owl:Class ;
+            rdfs:comment "name of countries"^^xsd:string .
 
 #properties
 chm:locateAt a rdf:Property ;
@@ -128,8 +154,8 @@ chm:locateAt a rdf:Property ;
 
 chm:belongTo a rdf:Property ;
           rdfs:domain chm:mountain ;
-          rdfs:range chm:mountainSeries ;
-          rdfs:comment "the series that a mountain belongs to"^^xsd:string .
+          rdfs:range chm:mountainRange ;
+          rdfs:comment "the mountain range that a mountain belongs to"^^xsd:string .
 
 chm:hasDirection a rdf:Property ;
           rdfs:domain chm:location ;
@@ -156,6 +182,11 @@ chm:hasName a rdf:Property ;
             rdfs:range xsd:string ;
             rdfs:comment "the name of the monster"^^xsd:string .
 
+chm:nameComesFrom a rdf:Property ;
+                    rdfs:domain chm:monster ;
+                    rdfs:range  xsd:string ;
+                    rdfs:comment "its name comes from"^^xsd:string .
+
 chm:looksLike a rdf:Property ;
               rdfs:domain chm:monster ;
               rdfs:range chm:animal ;
@@ -174,15 +205,19 @@ chm:hasRiver a rdf:Property ;
 
 chm:originsFrom a rdf:Property ;
                 rdfs:domain chm:river ;
-                rdfs:range chm:mountain ;
-                rdfs:comment "River origins from the mountain"^^xsd:string .
+                rdfs:range chm:location ;
+                rdfs:label "Origins from"@en ;
+                rdfs:label "发源"@cn ;
+                rdfs:comment "River origins from the other areas"^^xsd:string .
 
 chm:destination a rdf:Property ;
                 rdfs:domain chm:river ;
-                rdfs:range chm:river ;
+                rdfs:range chm:location ;
+                rdfs:label "Destination"@en ;
+                rdfs:label "流向"@cn ;
                 rdfs:comment "River destinates to"^^xsd:string .
 
-chm:direction a rdf:Property ;
+chm:riverDirection a rdf:Property ;
                 rdfs:domain chm:river ;
                 rdfs:range chm:cardinalDirection ;
                 rdfs:comment "River direction"^^xsd:string .
@@ -200,19 +235,19 @@ chm:hasEfficacyOf a rdf:Property ;
              rdfs:comment "Efficacy provided by eating monsters or wearing their feathers"^^xsd:string .
 
 chm:byEaten a rdf:Property ;
-         rdfs:subPropertyOf chm:hasEfficacy ;
+         rdfs:subPropertyOf chm:hasEfficacyOf ;
          rdfs:domain chm:monster ;
          rdfs:range xsd:string ;
          rdfs:comment "Efficacy by eating monsters"^^xsd:string .
 
 chm:byWorn a rdf:Property ;
-         rdfs:subPropertyOf chm:hasEfficacy ;
+         rdfs:subPropertyOf chm:hasEfficacyOf ;
          rdfs:domain chm:monster ;
          rdfs:range xsd:string ;
          rdfs:comment "Efficacy by wearing monsters' feathers"^^xsd:string .
 
 chm:byReared a rdf:Property ;
-        rdfs:subPropertyOf chm:hasEfficacy ;
+        rdfs:subPropertyOf chm:hasEfficacyOf ;
         rdfs:domain chm:monster ;
         rdfs:range xsd:string ;
         rdfs:comment "Efficacy by rearing monsters' feathers"^^xsd:string .
@@ -255,10 +290,16 @@ chm:hasOtherParts a rdf:Property ;
                   rdfs:comment "the monster has other body parts except those enumerated"^^xsd:string .
 
 ##skin
-chm:hasskin a rdf:Property ;
+chm:hasSkin a rdf:Property ;
             rdfs:domain chm:body ;
             rdfs:range chm:skin ;
             rdfs:comment "Monster has skin"^^xsd:string .
+
+chm:hasFur a rdf:Property ;
+        rdfs:subPropertyOf chm:hasSkin ;
+        rdfs:domain chm:skin ;
+        rdfs:range chm:fur ;
+        rdfs:comment "monster has fur"^^xsd:string .
 
 ##beak
 chm:hasBeak a rdf:Property ;
@@ -335,6 +376,18 @@ chm:hairLike a rdf:Property ;
               rdfs:domain chm:hair ;
               rdfs:range chm:thing ;
               rdfs:comment "Monster's hair like"^^xsd:string .
+
+##spurs
+chm:hasSpur a rdf:Property ;
+            rdfs:domain chm:body ;
+            rdfs:range chm:spur ;
+            rdfs:comment "Monster has spur"^^xsd:string .
+
+chm:spurLike a rdf:Property ;
+              rdfs:domain chm:hair ;
+              rdfs:range chm:animal ;
+              rdfs:comment "Monster's spur like"^^xsd:string .
+
 ##mouth
 chm:hasMouth a rdfs:Property ;
             rdfs:domain chm:body ;
@@ -378,10 +431,10 @@ chm:bristleSizeAs a rdfs:Property ;
             rdfs:range xsd:string ;
             rdfs:comment "size of bristle"^^xsd:string .
 
-chm:bristleFeature a rdfs:Property ;
+chm:bristleFeatureLike a rdfs:Property ;
                     rdfs:domain chm:bristle ;
-                    rdfs:range xsd:string ;
-                    rdfs:comment "size of bristle"^^xsd:string .
+                    rdfs:range chm:animal ;
+                    rdfs:comment "shape of bristle"^^xsd:string .
 
 ##hand
 chm:hasHand a rdfs:Property ;
@@ -490,18 +543,18 @@ chm:hasSameFeetAs a rdf:Property ;
                    rdfs:comment "monster has same feet as other animals"^^xsd:string .
 
 ##stripe
-chm:hasStripe a rdf:Property ;
+chm:hasMarkings a rdf:Property ;
               rdfs:domain chm:body ;
-              rdfs:range chm:stripe ;
+              rdfs:range chm:markings ;
               rdfs:comment "monster has stripe"^^xsd:string .
 
-chm:hasSameStripeAs a rdf:Property ;
-                    rdfs:domain chm:stripe ;
+chm:hasSameMarkingsAs a rdf:Property ;
+                    rdfs:domain chm:markings ;
                     rdfs:range chm:animal ;
                     rdfs:comment "monster has same stripe as other animals"^^xsd:string .
 
-chm:stripeColour a rdf:Property ;
-                 rdfs:domain chm:stripe ;
+chm:markingsColour a rdf:Property ;
+                 rdfs:domain chm:markings ;
                  rdfs:range chm:colour ;
                  rdfs:comment "the colour of stripe"^^xsd:string .
 
@@ -590,6 +643,31 @@ chm:hasCharacters a rdf:Property ;
                   rdfs:domain chm:monster ;
                   rdfs:range xsd:string ;
                   rdfs:comment "monster has some special characters"^^xsd:string .
+
+chm:inSummer a rdf:Property ;
+         rdfs:subPropertyOf chm:hasCharacters ;
+         rdfs:domain chm:monster ;
+         rdfs:range xsd:string ;
+         rdfs:comment "monster's characters in summer"^^xsd:string .
+
+chm:inWinter a rdf:Property ;
+        rdfs:subPropertyOf chm:hasCharacters ;
+        rdfs:domain chm:monster ;
+        rdfs:range xsd:string ;
+        rdfs:comment "monster's characters in winter"^^xsd:string .
+
+chm:reproductiveCharacteristics a rdf:Property ;
+        rdfs:subPropertyOf chm:hasCharacters ;
+        rdfs:domain chm:monster ;
+        rdfs:range xsd:string ;
+        rdfs:comment "monster's Reproductive characteristics"^^xsd:string .
+
+chm:dietaryCharacteristics a rdf:Property ;
+        rdfs:subPropertyOf chm:hasCharacters ;
+        rdfs:domain chm:monster ;
+        rdfs:range xsd:string ;
+        rdfs:label "devour"@en ;
+        rdfs:comment "monster's dietary characteristics"^^xsd:string .
 
 ##action
 chm:hasAction a rdf:Property ;
