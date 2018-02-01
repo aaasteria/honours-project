@@ -55,6 +55,12 @@ chm:face a owl:Class ;
 chm:mouth a owl:Class ;
           rdfs:comment "represents monster's mouth"^^xsd:string .
 
+chm:tongue a owl:Class ;
+             rdfs:comment "represents monster's tongue"^^xsd:string .
+
+chm:fang a owl:Class ;
+            rdfs:comment "represents monster's fang"^^xsd:string .
+
 chm:hand a owl:Class ;
         rdfs:comment "represents monster's hand"^^xsd:string .
 
@@ -70,6 +76,9 @@ chm:feather a owl:Class ;
 
 chm:bristle a owl:Class ;
             rdfs:comment "represents monster's bristle"^^xsd:string .
+
+chm:bristleTips a owl:Class ;
+                rdfs:comment "represents monster's bristle tips"^^xsd:string .
 
 chm:spur a owl:Class ;
             rdfs:comment "represents monster's spurs"^^xsd:string .
@@ -333,6 +342,11 @@ chm:hasMarkingsLike a rdf:Property ;
               rdfs:range chm:animal ;
               rdfs:comment "Monster has markings which look like other animals on its arm"^^xsd:string .
 
+chm:armSize a rdf:Property ;
+              rdfs:domain chm:arm ;
+              rdfs:range xsd:string ;
+              rdfs:comment "size of arm"^^xsd:string .
+
 ##ruff
 chm:hasRuff a rdf:Property ;
             rdfs:domain chm:skin ;
@@ -399,6 +413,26 @@ chm:mouthNumber a rdf:Property ;
                rdfs:range xsd:integer ;
                rdfs:comment "the number of mouthes"^^xsd:string .
 
+chm:hasTongue a rdfs:Property ;
+            rdfs:domain chm:mouth ;
+            rdfs:range chm:tongue ;
+            rdfs:comment "Monster has tongue"^^xsd:string .
+
+chm:hasSameTongueAs a rdf:Property ;
+            rdfs:domain chm:tongue ;
+            rdfs:range chm:animal ;
+            rdfs:comment "Monster has same tongue as others"^^xsd:string .
+
+chm:hasFang a rdfs:Property ;
+            rdfs:domain chm:mouth ;
+            rdfs:range chm:fang ;
+            rdfs:comment "Monster has fang"^^xsd:string .
+
+chm:hasSameFangAs a rdf:Property ;
+            rdfs:domain chm:tongue ;
+            rdfs:range chm:animal ;
+            rdfs:comment "Monster has same fang as others"^^xsd:string .
+
 ##horn
 chm:hasHorn a rdfs:Property ;
            rdfs:domain chm:head ;
@@ -435,6 +469,22 @@ chm:bristleFeatureLike a rdfs:Property ;
                     rdfs:domain chm:bristle ;
                     rdfs:range chm:animal ;
                     rdfs:comment "shape of bristle"^^xsd:string .
+
+chm:bristleColour a rdfs:Property ;
+                  rdfs:domain chm:bristleTips ;
+                  rdfs:range chm:colour ;
+                  rdfs:comment "Monster's bristle tips color"^^xsd:string .
+
+##spine
+chm:hasSpine a rdfs:Property ;
+            rdfs:domain chm:skin ;
+            rdfs:range chm:spine ;
+            rdfs:comment "Monster has spine"^^xsd:string .
+
+chm:hasSameSpineAs a rdfs:Property ;
+                    rdfs:domain chm:spine ;
+                    rdfs:range chm:animal ;
+                    rdfs:comment "has same spine as other animals"^^xsd:string .
 
 ##hand
 chm:hasHand a rdfs:Property ;
@@ -557,6 +607,11 @@ chm:markingsColour a rdf:Property ;
                  rdfs:domain chm:markings ;
                  rdfs:range chm:colour ;
                  rdfs:comment "the colour of stripe"^^xsd:string .
+
+chm:markingsAreOn a rdf:Property ;
+                    rdfs:domain chm:markings ;
+                    rdfs:range chm:body ;
+                    rdfs:comment "markings are on body part"^^xsd:string .
 
 ##wings
 chm:hasWings a rdf:Property ;
